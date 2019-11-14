@@ -14,6 +14,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +28,9 @@ class MainActivity : AppCompatActivity() {
     var searchCategory: String = ""
     var arraylist = ArrayList<Goods?>()
     var productkeylist = ArrayList<String?>()
+    var list = ArrayList<String>()
     var product: Goods? = null
+
     //var adapter = null
 
     val categorys = ArrayList<String>()
@@ -153,4 +161,27 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+    private val onClickItem = View.OnClickListener { v ->
+        val str = v.tag as String
+        Toast.makeText(this@MainActivity, str, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.mainmenu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.catemenu -> {
+                Toast.makeText(applicationContext, "click on category", Toast.LENGTH_LONG).show()
+                val Intent = Intent(this, CategoryActivity::class.java)
+                startActivity(Intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 }

@@ -40,16 +40,15 @@ class DetailActivity : AppCompatActivity() {
                         //textViewNo.setText(productData.key)
 
                         val imageUrl = productData.child("img").value.toString()
-                        Glide.with(this@DetailActivity).load(imageUrl).into(imageViewGoods)
+                        Glide.with(this@DetailActivity).load(imageUrl).into(imageView)
 
-                        textViewName.text = productData.child("name").value.toString() + " (" + productData.child("sort").value.toString() + " - " + productData.key + ")"
+                        textViewCategory.text = "Category: "+productData.child("sort").value.toString()
+                        textViewNameKey.text = productData.child("name").value.toString()+"("+productData.key+")"
                         textViewPrice.text = productData.child("price").value.toString() + "원"
                         textViewExp.text = productData.child("exp").value.toString()
                         //textViewSort.text = productData.child("sort").value.toString()
                         //이미지 넣기
                     }
-                    val productkey = productData.key
-                    val productName = productData.child("name").value.toString()
                 }
             }
             override fun onCancelled(error: DatabaseError) {
