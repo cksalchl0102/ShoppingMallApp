@@ -3,6 +3,7 @@ package kr.ac.hansung.shoppingmall
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
@@ -21,7 +22,7 @@ class CategoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_category)
 
         adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, categorys);
-        categoryList = findViewById(R.id.categoryList)
+        categoryList = findViewById(R.id.categoryList) as ListView
         categoryList.adapter = adapter
 
         val categoryDatabase = FirebaseDatabase.getInstance().reference.child("category")
@@ -30,6 +31,7 @@ class CategoryActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for(child in dataSnapshot.children) {
                     categorys.add(child.key.toString())
+                    Log.i("chanmi",child.key.toString())
                 }
                 adapter.notifyDataSetChanged()
                 adapter.notifyDataSetInvalidated()

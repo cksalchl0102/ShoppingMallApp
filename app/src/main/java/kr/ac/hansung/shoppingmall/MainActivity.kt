@@ -14,6 +14,13 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import android.widget.Toast
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +29,10 @@ class MainActivity : AppCompatActivity() {
     var arraylist = ArrayList<Goods?>()
     var productkeylist = ArrayList<String?>()
     var product: Goods? = null
+
     //var adapter = null
+
+
 
     // Write a message to the database
     val database = FirebaseDatabase.getInstance().reference.child("product")
@@ -37,7 +47,19 @@ class MainActivity : AppCompatActivity() {
 
         val listView = findViewById<ListView>(R.id.productListview)
         val searchbtn = findViewById<ImageButton>(R.id.searchbtn)
+/*
 
+        //내가 추가한 부분
+        var adapter1: MyAdapter? = null
+        val categorys = ArrayList<String>()
+
+        var listview1 = findViewById<ListView>(R.id.main_listview)
+        categorys.add("Outer")
+        categorys.add("Top")
+        categorys.add("Bottom")
+        adapter1 = MyAdapter(this,categorys,onClickItem)
+        listview1.adapter = adapter1
+*/
 
         listView.adapter = adapter
 
@@ -112,6 +134,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+    private val onClickItem = View.OnClickListener { v ->
+        val str = v.tag as String
+        Toast.makeText(this@MainActivity, str, Toast.LENGTH_SHORT).show()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.mainmenu, menu)
@@ -129,4 +156,5 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 }
