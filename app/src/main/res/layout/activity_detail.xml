@@ -4,6 +4,31 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:text_aling="center"
+        android:textColor="@android:color/black"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:text_align="center"
+        android:textColor="@android:color/black"
+        android:textSize="26sp" />
+
     <ImageView
         android:id="@+id/imageViewGoods"
         android:layout_width="match_parent"
@@ -13,7 +38,18 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/textViewKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textViewName4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -35,7 +71,8 @@
             android:id="@+id/textView4"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="가격" />
+            android:text="상품 가격"
+            android:textColor="@android:color/black"/>
 
         <TextView
             android:id="@+id/textViewPrice"
@@ -45,7 +82,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:text="TextView"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/holo_blue_dark"
             android:textSize="24sp" />
     </LinearLayout>
 
@@ -54,7 +91,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="상세설명" />
+        android:text="상품 설명"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/textViewExp"
@@ -64,5 +102,5 @@
         android:layout_marginRight="10dp"
         android:layout_weight="3"
         android:text="TextView"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/holo_blue_dark" />
 </LinearLayout>

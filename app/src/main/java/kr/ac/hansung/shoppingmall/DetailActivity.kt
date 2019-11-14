@@ -42,7 +42,9 @@ class DetailActivity : AppCompatActivity() {
                         val imageUrl = productData.child("img").value.toString()
                         Glide.with(this@DetailActivity).load(imageUrl).into(imageViewGoods)
 
-                        textViewName.text = productData.child("name").value.toString() + " (" + productData.child("sort").value.toString() + " - " + productData.key + ")"
+                        textViewCategory.text = "<"+productData.child("name").value.toString() + ">"
+                        textViewName.text = productData.child("sort").value.toString()
+                        textViewKey.text = productData.key + ")"
                         textViewPrice.text = productData.child("price").value.toString() + "원"
                         textViewExp.text = productData.child("exp").value.toString()
                         //textViewSort.text = productData.child("sort").value.toString()
