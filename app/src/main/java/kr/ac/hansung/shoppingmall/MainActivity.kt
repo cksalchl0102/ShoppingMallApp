@@ -17,9 +17,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Toast
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.recyclerview.widget.LinearLayoutManager
+
 
 
 
@@ -28,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     var searchText: String = ""
     var arraylist = ArrayList<Goods?>()
     var productkeylist = ArrayList<String?>()
+    var list = ArrayList<String>()
     var product: Goods? = null
 
     //var adapter = null
@@ -47,20 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         val listView = findViewById<ListView>(R.id.productListview)
         val searchbtn = findViewById<ImageButton>(R.id.searchbtn)
-/*
-
-        //내가 추가한 부분
-        var adapter1: MyAdapter? = null
-        val categorys = ArrayList<String>()
-
-        var listview1 = findViewById<ListView>(R.id.main_listview)
-        categorys.add("Outer")
-        categorys.add("Top")
-        categorys.add("Bottom")
-        adapter1 = MyAdapter(this,categorys,onClickItem)
-        listview1.adapter = adapter1
-*/
-
         listView.adapter = adapter
 
         listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
