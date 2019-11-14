@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         var adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, this.productkeylist)
 
         val listView = findViewById<ListView>(R.id.productListview)
-        val searchbtn = findViewById<Button>(R.id.searchbtn)
+        val searchbtn = findViewById<ImageButton>(R.id.searchbtn)
 
 
         listView.adapter = adapter
