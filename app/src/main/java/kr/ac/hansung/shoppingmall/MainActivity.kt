@@ -17,12 +17,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-
+    val context = this
     var searchText: String = ""
+    var searchCategory: String = ""
     var arraylist = ArrayList<Goods?>()
     var productkeylist = ArrayList<String?>()
     var product: Goods? = null
     //var adapter = null
+
+    val categorys = ArrayList<String>()
+    lateinit var categoryAdapter:ArrayAdapter<String>
+    lateinit var categorySpinner: Spinner
 
     // Write a message to the database
     val database = FirebaseDatabase.getInstance().reference.child("product")
@@ -32,12 +37,47 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val categoryDatabase = FirebaseDatabase.getInstance().reference.child("category")
+
+        val singleListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for(child in dataSnapshot.children) {
+                    categorys.add(child.key.toString())
+                }
+                categoryAdapter.notifyDataSetChanged()
+                categoryAdapter.notifyDataSetInvalidated()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        }
+        categoryDatabase.addListenerForSingleValueEvent(singleListener)
+
+        categoryAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categorys);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        categorySpinner = findViewById(R.id.spinner)
+        categorySpinner.adapter = categoryAdapter
+        categorySpinner.setSelection(0)
+        categorySpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                var s : String = categorySpinner.selectedItem as String
+
+                val nextIntent = Intent(context, CategorizedActivity::class.java)
+                nextIntent.putExtra("category", s)
+                startActivity(nextIntent)
+            }
+        }
+
+
+
         //if(arraylist!-)
         var adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, this.productkeylist)
 
         val listView = findViewById<ListView>(R.id.productListview)
         val searchbtn = findViewById<ImageButton>(R.id.searchbtn)
-
 
         listView.adapter = adapter
 
@@ -72,6 +112,7 @@ class MainActivity : AppCompatActivity() {
             override fun onCancelled(databaseError: DatabaseError) {}
 
         }
+
 
         searchbtn.setOnClickListener {
             val searchedittext = findViewById<EditText>(R.id.searchEdittext)
@@ -111,22 +152,5 @@ class MainActivity : AppCompatActivity() {
                 // Failed to read value
             }
         })
-    }
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.mainmenu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.catemenu -> {
-                Toast.makeText(applicationContext, "click on category", Toast.LENGTH_LONG).show()
-                val Intent = Intent(this, CategoryActivity::class.java)
-                startActivity(Intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }
