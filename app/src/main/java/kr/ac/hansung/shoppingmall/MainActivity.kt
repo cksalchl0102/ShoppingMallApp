@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var categoryAdapter:ArrayAdapter<String>
     lateinit var categorySpinner: Spinner
 
+
+
     // Write a message to the database
     val database = FirebaseDatabase.getInstance().reference.child("product")
 
@@ -120,7 +122,6 @@ class MainActivity : AppCompatActivity() {
             override fun onCancelled(databaseError: DatabaseError) {}
 
         }
-
 
         searchbtn.setOnClickListener {
             val searchedittext = findViewById<EditText>(R.id.searchEdittext)
